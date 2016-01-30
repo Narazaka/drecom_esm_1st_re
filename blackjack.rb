@@ -42,6 +42,13 @@ describe Game do
   end
 end
 
+class Player
+  attr_reader :cards
+  def initialize
+    @cards = Cards.new
+  end
+end
+
 class Card
   attr_reader :number, :mark
 
