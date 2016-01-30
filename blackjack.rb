@@ -88,7 +88,9 @@ class Cards < Array
     is_1, not_1 = partition {|card| card.number == 1}
     is_1_count = is_1.count
     min_point = is_1_count + not_1.inject(0) {|sum, card| sum + card.number}
-    if is_1_count > 0 && min_point + 10 <= 21
+    if min_point > 21
+      0
+    elsif is_1_count > 0 && min_point + 10 <= 21
       min_point + 10
     else
       min_point
@@ -106,6 +108,10 @@ describe Cards do
     context do
       let(:cards) { Cards.new([1, 10].map {|n| Card.new(number: n, mark: :spade)}) }
       it { is_expected.to eq 21 }
+    end
+    context do
+      let(:cards) { Cards.new([2, 10, 10].map {|n| Card.new(number: n, mark: :spade)}) }
+      it { is_expected.to eq 0 }
     end
   end
 end
