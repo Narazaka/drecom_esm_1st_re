@@ -10,7 +10,7 @@ class Game
       (1 .. 13).map do |number|
         Card.new(number: number, mark: mark)
       end
-    end
+    end.flatten
   end
 
   def self.shuffler(cards)
@@ -19,6 +19,7 @@ class Game
 
   def setup_cards(shuffler = Game.method(:shuffler))
     @all_cards = shuffler.call(Game.initial_cards)
+    p @all_cards
     return # 中身を知られてはいけない
   end
 end
