@@ -59,9 +59,10 @@ end
 
 describe Game do
   describe "#start" do
+    shuffler = lambda {|cards| cards}
     let(:players) {[Player.new, Player.new]}
     let(:game) {Game.new(players)}
-    subject {game.start}
+    subject {game.start(shuffler)}
     it {is_expected.to eq players.last}
   end
 end
