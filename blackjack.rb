@@ -80,6 +80,35 @@ class Player
   end
 end
 
+describe Player do
+  let(:player) {Player.new}
+  describe "#want_deal?" do
+    subject{player.want_deal?}
+    context "buta" do
+      before do
+        player.cards << Card.new(number: 10, mark: :spade)
+        player.cards << Card.new(number: 10, mark: :spade)
+        player.cards << Card.new(number: 10, mark: :spade)
+      end
+      it {is_expected.to be_falsey}
+    end
+    context "not buta and >= 16" do
+      before do
+        player.cards << Card.new(number: 10, mark: :spade)
+        player.cards << Card.new(number: 10, mark: :spade)
+      end
+      it {is_expected.to be_falsey}
+    end
+    context "not buta and < 16" do
+      before do
+        player.cards << Card.new(number: 10, mark: :spade)
+        player.cards << Card.new(number: 5, mark: :spade)
+      end
+      it {is_expected.to be_truthy}
+    end
+  end
+end
+
 class Card
   attr_reader :number, :mark
 
