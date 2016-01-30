@@ -34,6 +34,7 @@ class Game
     setup_cards
     initial_deal
     additional_deal
+    detect_winner
   end
   
   def additional_deal
@@ -42,6 +43,10 @@ class Game
         player.cards << deal
       end
     end
+  end
+
+  def detect_winner
+    @players.sort_by {|player| player.cards.point}.last
   end
 
   def deal
