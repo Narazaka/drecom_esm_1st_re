@@ -74,7 +74,8 @@ class Player
   end
 
   def want_deal?
-    cards.point < 16
+    point = cards.point
+    0 <= point && point < 16
   end
 end
 
@@ -93,7 +94,7 @@ class Cards < Array
     is_1_count = is_1.count
     min_point = is_1_count + not_1.inject(0) {|sum, card| sum + card.number}
     if min_point > 21
-      0
+      -1
     elsif is_1_count > 0 && min_point + 10 <= 21
       min_point + 10
     else
@@ -115,7 +116,7 @@ describe Cards do
     end
     context do
       let(:cards) { Cards.new([2, 10, 10].map {|n| Card.new(number: n, mark: :spade)}) }
-      it { is_expected.to eq 0 }
+      it { is_expected.to eq -1 }
     end
   end
 end
