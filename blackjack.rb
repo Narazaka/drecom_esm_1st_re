@@ -1,3 +1,5 @@
+# Coding: utf-8
+Encoding.default_external = Encoding::UTF_8
 require 'rspec'
 
 class Game
@@ -30,8 +32,8 @@ class Game
     end
   end
 
-  def start
-    setup_cards
+  def start(shuffler = Game.method(:shuffler))
+    setup_cards(shuffler)
     initial_deal
     additional_deal
     detect_winner
@@ -56,11 +58,11 @@ class Game
 end
 
 describe Game do
-  describe "#setup_cards" do
+  describe "#start" do
     let(:players) {[Player.new, Player.new]}
     let(:game) {Game.new(players)}
     subject {game.start}
-    it {is_expected.to eq players.first}
+    it {is_expected.to eq players.last}
   end
 end
 
