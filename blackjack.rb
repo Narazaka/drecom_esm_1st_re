@@ -23,8 +23,10 @@ class Game
   end
 
   def initial_deal
-    @players.each do |player|
-      player.cards << deal
+    2.times do
+      @players.each do |player|
+        player.cards << deal
+      end
     end
   end
 
