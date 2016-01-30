@@ -19,9 +19,20 @@ class Game
 
   def setup_cards(shuffler = Game.method(:shuffler))
     @all_cards = shuffler.call(Game.initial_cards)
-    p @all_cards
     return # 中身を知られてはいけない
   end
+
+  def initial_deal
+    @players.each do |player|
+      player.cards << deal
+    end
+  end
+
+  def start
+    setup_cards
+    initial_deal
+  end
+
 end
 
 describe Game do
