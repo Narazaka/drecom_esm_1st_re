@@ -57,8 +57,10 @@ end
 
 describe Game do
   describe "#setup_cards" do
-    let(:game) {Game.new}
-    it {expect(game.setup_cards)}
+    let(:players) {[Player.new, Player.new]}
+    let(:game) {Game.new(players)}
+    subject {game.start}
+    it {is_expected.to eq players.first}
   end
 end
 
