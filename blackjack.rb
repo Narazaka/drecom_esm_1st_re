@@ -1,3 +1,5 @@
+require 'rspec'
+
 class Card
   attr_reader :number, :mark
 
@@ -16,6 +18,20 @@ class Cards < Array
       min_point + 10
     else
       min_point
+    end
+  end
+end
+
+describe Cards do
+  describe "#point" do
+    subject {cards.point}
+    context do
+      let(:cards) { Cards.new([1, 1, 10].map {|n| Card.new(number: n, mark: :spade)}) }
+      it { is_expected.to eq 12 }
+    end
+    context do
+      let(:cards) { Cards.new([1, 10].map {|n| Card.new(number: n, mark: :spade)}) }
+      it { is_expected.to eq 21 }
     end
   end
 end
