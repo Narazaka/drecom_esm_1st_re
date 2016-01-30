@@ -44,8 +44,13 @@ end
 
 class Player
   attr_reader :cards
+
   def initialize
     @cards = Cards.new
+  end
+
+  def want_deal?
+    cards.point < 16
   end
 end
 
