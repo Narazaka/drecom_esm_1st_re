@@ -33,6 +33,19 @@ class Game
   def start
     setup_cards
     initial_deal
+    additional_deal
+  end
+  
+  def additional_deal
+    @players.each do |player|
+      while player.want_deal?
+        player.cards << deal
+      end
+    end
+  end
+
+  def deal
+    @all_cards.pop
   end
 
 end
