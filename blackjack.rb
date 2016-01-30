@@ -1,5 +1,35 @@
 require 'rspec'
 
+class Game
+  def initialize(players = [])
+    @players = players
+  end
+
+  def self.initial_cards
+    [:heart, :spade, :clover, :diamond].map do |mark|
+      (1 .. 13).map do |number|
+        Card.new(number: number, mark: mark)
+      end
+    end
+  end
+
+  def self.shuffler(cards)
+    cards.shuffle
+  end
+
+  def setup_cards(shuffler = Game.method(:shuffler))
+    @all_cards = shuffler.call(Game.initial_cards)
+    return # 中身を知られてはいけない
+  end
+end
+
+describe Game do
+  describe "#setup_cards" do
+    let(:game) {Game.new}
+    it {expect(game.setup_cards)}
+  end
+end
+
 class Card
   attr_reader :number, :mark
 
